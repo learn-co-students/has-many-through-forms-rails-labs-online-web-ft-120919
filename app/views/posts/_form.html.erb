@@ -1,1 +1,43 @@
+<%= form_for @post do |f| %>
+  <p>
+    <%= f.label "Title" %>
+    <%= f.text_field :title %>
+  </p>
 
+  <p>
+    <%= f.label "Content" %>
+    <%= f.text_area :content %>
+  </p>
+
+  <% #How can I build a check box for each category? %>
+  <% #Low-level HTML way %>
+  <!--
+  <% Category.all.each do |c| %>
+    <p>
+      <label for="category_id_<%= c.id %>"><%= c.name %></label>
+      <input type="checkbox" name="post[category_ids][]" value="<%= c.id %>" id="category_id_<%= c.id %>">
+    </p>
+  <% end %>
+
+  <input type="text" id="post_categories_attributes_0_name" name="post[categories_attributes][0][name]" />
+  <input type="text" id="post_categories_attributes_1_name" name="post[categories_attributes][1][name]" />
+  -->
+
+  <% #Using form helpers %>
+  <% #Will generate a checkbox named post[category_ids][] for each category in Category.all %>
+  <% #Will use the :id as the value for the checkbox and the :name method as the label for the checkbox %>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b| %>
+    <p>
+      <%= b.label %>
+      <%= b.check_box %>
+    </p>
+  <% end %>
+
+  <% #Blank input fields for new categories %>
+  <% #Builder will wrap around blank categories that got built in 'new' controller action %>
+  <%= f.fields_for :categories do |category_builder| %>
+    <%= category_builder.text_field :name %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
