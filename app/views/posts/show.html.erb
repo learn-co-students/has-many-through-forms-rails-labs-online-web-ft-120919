@@ -1,1 +1,38 @@
+<h3><%= @post.title %></h3>
 
+<p><%= @post.content %></p>
+
+<h4>Categories</h4>
+<ul>
+<% @post.categories.each do |category| %>
+  <li><%= category.name %></li>
+<% end %>
+</ul>
+
+<br><br>
+<h4>Comments</h4>
+<ul>
+<% @post.comments.each do |comment| %>
+  <li><%= comment.content %></li>
+<% end %>
+</ul>
+
+
+
+<% #Appears that comment is being associated to a post %>
+<% #Now, to associate it with a user... %>
+<h4>Leave a Comment</h4>
+<%= form_for @post.comments.build do |f| %>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.label :content %>
+  <%= f.text_field :content %><br>
+
+  <%= f.collection_select :username, User.all, :id, :username %>
+
+  <%= f.fields_for :user, User.new do |user_builder| %>
+    <%= user_builder.label :username %>
+    <%= user_builder.text_field :username %>
+  <% end %>
+
+  <br><%= f.submit %>
+<% end %>
