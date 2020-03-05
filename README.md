@@ -1,5 +1,11 @@
 # Has Many Through Forms Rails Labs
 
+<ul>
+        <%= @post.users.each do |user| %>
+            <li><%= link_to user.username, user_path(user) %></li>
+        <% end%>
+    </ul>
+
 ## Overview
 
 We've looked at setting up the associations behind posts with comments, categories, and users. Now, let's actually give our users the ability to create new comments, users, and categories! For this lab, your models are already stubbed out, but you may need to update them to make your forms work properly.
