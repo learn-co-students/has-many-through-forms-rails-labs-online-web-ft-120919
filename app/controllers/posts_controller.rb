@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   def show
+    @user = User.new
+    @comment = Comment.new
     @post = Post.find(params[:id])
   end
 
