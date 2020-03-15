@@ -30,9 +30,9 @@ Add Comment:
   Users:<br>
   <%= f.collection_select :user_id, User.all, :id, :username, include_blank: true  %>
 
-<!--  <%#= f.fields_for :user, @comment.user.build do |user_fields| %>
-    <%#= user_fields.text_field :username %>
-  <%# end %>-->
+  <%= f.fields_for :user, User.new do |user_fields| %>
+    <%= user_fields.text_field :username %>
+  <% end %>
 
   <%= f.hidden_field :post_id, value: @post.id %>
   <%= f.submit %>
