@@ -1,0 +1,167 @@
+
+Unsure how to create a new user with field_for. All other tests pass.
+
+
+
+
+In app/views/posts/show.html.erb:
+
+<%#= f.fields_for :user, @comment.user.build do |user_fields| %>
+    <%#= user_fields.text_field :username %>
+  <%# end %>
+
+Failures:
+
+  1) comments creates a comment and a new user
+     Failure/Error: fill_in('comment_user_attributes_username', with: 'CoolPerson25')
+
+     Capybara::ElementNotFound:
+       Unable to find field "comment_user_attributes_username"
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/node/finders.rb:302:in `block in synced_resolve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/node/base.rb:83:in `synchronize'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/node/finders.rb:293:in `synced_resolve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/node/finders.rb:48:in `find'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/node/actions.rb:90:in `fill_in'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/session.rb:744:in `block (2 levels) in <class:Session>'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/features/comments_spec.rb:21:in `block (2 levels) in <top (required)>'
+
+Finished in 6.61 seconds (files took 18.46 seconds to load)
+13 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/features/comments_spec.rb:19 # comments creates a comment and a new user
+
+
+WHEN I try to uncomment the fields_for I get the following error:
+
+Failures:
+
+  1) comments creates a comment and a new user
+     Failure/Error: <%= f.fields_for :user, @comment.user.build do |user_fields| %>
+
+     ActionView::Template::Error:
+       undefined method `build' for nil:NilClass
+     # ./app/views/posts/show.html.erb:33:in `block in _app_views_posts_show_html_erb__2180958608891289642_70368551662540'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/helpers/capture_helper.rb:39:in `block in capture'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/helpers/capture_helper.rb:203:in `with_output_buffer'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/helpers/capture_helper.rb:39:in `capture'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/helpers/form_helper.rb:450:in `form_for'
+     # ./app/views/posts/show.html.erb:27:in `_app_views_posts_show_html_erb__2180958608891289642_70368551662540'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/template.rb:159:in `block in render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications.rb:166:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/template.rb:354:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/template.rb:157:in `render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/abstract_renderer.rb:42:in `block in instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications.rb:164:in `block in instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications.rb:164:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/abstract_renderer.rb:41:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/template_renderer.rb:14:in `render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/renderer.rb:42:in `render_template'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/renderer/renderer.rb:23:in `render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/rendering.rb:104:in `_render_template'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/streaming.rb:217:in `_render_template'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/rendering.rb:83:in `render_to_body'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/rendering.rb:52:in `render_to_body'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/renderers.rb:142:in `render_to_body'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/abstract_controller/rendering.rb:26:in `render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/rendering.rb:36:in `render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/core_ext/benchmark.rb:12:in `ms'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.0.7.1/lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/instrumentation.rb:43:in `render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/implicit_render.rb:36:in `default_render'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/abstract_controller/base.rb:188:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/rendering.rb:30:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:126:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:506:in `block (2 levels) in compile'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:455:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:750:in `_run_process_action_callbacks'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:90:in `run_callbacks'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/abstract_controller/callbacks.rb:19:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/rescue.rb:20:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications.rb:164:in `block in instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/notifications.rb:164:in `instrument'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal/params_wrapper.rb:248:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.0.7.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/abstract_controller/base.rb:126:in `process'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionview-5.0.7.1/lib/action_view/rendering.rb:30:in `process'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal.rb:190:in `dispatch'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_controller/metal.rb:262:in `dispatch'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/routing/route_set.rb:32:in `serve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/journey/router.rb:39:in `block in serve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/journey/router.rb:26:in `each'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/journey/router.rb:26:in `serve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/routing/route_set.rb:727:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/etag.rb:25:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/conditional_get.rb:25:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/head.rb:12:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/session/abstract/id.rb:259:in `context'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/session/abstract/id.rb:253:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/callbacks.rb:90:in `run_callbacks'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/railties-5.0.7.1/lib/rails/rack/logger.rb:36:in `call_app'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/railties-5.0.7.1/lib/rails/rack/logger.rb:24:in `block in call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/tagged_logging.rb:69:in `tagged'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/railties-5.0.7.1/lib/rails/rack/logger.rb:24:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/request_id.rb:24:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/method_override.rb:22:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/runtime.rb:22:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/activesupport-5.0.7.1/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/executor.rb:12:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/actionpack-5.0.7.1/lib/action_dispatch/middleware/static.rb:136:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/sendfile.rb:111:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/railties-5.0.7.1/lib/rails/engine.rb:522:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/urlmap.rb:68:in `block in call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/urlmap.rb:53:in `each'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-2.0.8/lib/rack/urlmap.rb:53:in `call'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/session.rb:277:in `visit'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.13.2/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/features/comments_spec.rb:9:in `block (2 levels) in <top (required)>'
+     # ------------------
+     # --- Caused by: ---
+     # NoMethodError:
+     #   undefined method `build' for nil:NilClass
+     #   ./app/views/posts/show.html.erb:33:in `block in _app_views_posts_show_html_erb__2180958608891289642_70368551662540'
+
+Finished in 1.48 seconds (files took 19.14 seconds to load)
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/features/comments_spec.rb:19 # comments creates a comment and a new user
+
