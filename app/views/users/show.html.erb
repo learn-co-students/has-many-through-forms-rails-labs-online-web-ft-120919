@@ -1,1 +1,9 @@
+<h1><%= @user.username%></h1>
 
+<h2><%= @user.username%> has commented on:</h2>
+
+<ul>
+<% @user.posts.each do |p| %>
+    <li><p><%= link_to p.title, post_path(p) %></p></li>
+<%end%>
+</ul>
