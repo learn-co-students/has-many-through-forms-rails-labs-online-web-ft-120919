@@ -1,0 +1,11 @@
+<%# binding.pry %>
+<div><%= @category.name%> </div>
+
+<div>
+    <ul>
+        <% @category.posts.each do |cp| %>
+        <%=link_to cp.title, post_path(cp) %>
+        <%= cp.content %>
+        <% end %>
+    </ul>
+</div>
